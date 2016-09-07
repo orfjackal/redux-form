@@ -59,11 +59,14 @@ const behaviors = {
       return makeFieldValue(result);
     }, stateCopy);
   },
-  [CHANGE](state, {field, value, touch}) {
+  [CHANGE](state, {field, value, touch, clearErrors}) {
     return write(field, previous => {
-      const {asyncError, submitError, autofilled, ...result} = {...previous, value};
+      const {asyncError, autofilled, ...result} = {...previous, value};
       if (touch) {
         result.touched = true;
+      }
+      if (clearErrors) {
+        delete result.submitError;
       }
       return makeFieldValue(result);
     }, state);

@@ -53,7 +53,8 @@ const createReduxFormConnector =
         formKey: PropTypes.string,
         getFormState: PropTypes.func,
         touchOnBlur: PropTypes.bool,
-        touchOnChange: PropTypes.bool
+        touchOnChange: PropTypes.bool,
+        clearErrorsOnChange: PropTypes.bool
       };
       ReduxFormConnector.defaultProps = {
         reduxMountPoint: 'form',

@@ -17,6 +17,7 @@ const createReduxForm =
           overwriteOnInitialValuesChange: true,
           touchOnBlur: true,
           touchOnChange: false,
+          clearErrorsOnChange: true,
           destroyOnUnmount: true,
           ...config
         };

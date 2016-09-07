@@ -210,7 +210,8 @@ const createHigherOrderComponent = (config,
         touch: !!config.touchOnBlur
       }),
       change: bindActionData(importedActions.change, {
-        touch: !!config.touchOnChange
+        touch: !!config.touchOnChange,
+        clearErrors: !!config.clearErrorsOnChange
       })
     };
 

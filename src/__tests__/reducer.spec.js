@@ -989,7 +989,8 @@ describe('reducer', () => {
       }
     }, {
       ...change('myField', 'different'),
-      form: 'foo'
+      form: 'foo',
+      clearErrors: true
     });
     expect(state.foo)
       .toEqual({

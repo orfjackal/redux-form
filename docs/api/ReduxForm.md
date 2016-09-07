@@ -126,6 +126,10 @@ detect submit failures and run some code when a submit fails.
 
 > marks fields as `touched` when the change action is fired. Defaults to `false`.
 
+#### `clearErrorsOnChange : boolean` [optional]
+
+> removes existing submit errors from the field when the change action is fired. Defaults to `true`.
+
 #### `validate : (values:Object, props:Object) => errors:Object` [optional]
 
 > a synchronous validation function that takes the form values and props passed into your component.

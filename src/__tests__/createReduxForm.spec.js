@@ -385,6 +385,55 @@ describe('createReduxForm', () => {
     });
   });
 
+  it('should NOT clear submit errors on change if clearErrorsOnChange is disabled', () => {
+    const store = makeStore();
+    const form = 'testForm';
+    const Decorated = reduxForm({
+      form,
+      fields: [ 'foo' ],
+      clearErrorsOnChange: false,
+      onSubmit: () => Promise.reject({ foo: 'Some error' })
+    })(Form);
+    const dom = TestUtils.renderIntoDocument(
+      <Provider store={store}>
+        <Decorated/>
+      </Provider>
+    );
+    const stub = TestUtils.findRenderedComponentWithType(dom, Form);
+    return stub.props.handleSubmit()
+      .then(() => {
+        // before change
+        expectField({
+          field: stub.props.fields.foo,
+          name: 'foo',
+          value: '',
+          initial: '',
+          valid: false,
+          dirty: false,
+          error: 'Some error',
+          touched: true,
+          visited: false,
+          readonly: false
+        });
+
+        stub.props.fields.foo.onChange('fooValue');
+
+        // after change
+        expectField({
+          field: stub.props.fields.foo,
+          name: 'foo',
+          value: 'fooValue',
+          initial: '',
+          valid: false,
+          dirty: true,
+          error: 'Some error',
+          touched: true,
+          visited: false,
+          readonly: false
+        });
+      });
+  });
+
   it('should set visited field on focus', () => {
     const store = makeStore();
     const form = 'testForm';
